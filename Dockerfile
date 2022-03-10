@@ -1,4 +1,4 @@
-FROM node:alpine3.14
+FROM node:dubnium-alpine3.11
 WORKDIR /usr/src/app
 COPY . .
 RUN npm install
