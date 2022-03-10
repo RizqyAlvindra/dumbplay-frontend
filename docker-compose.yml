@@ -1,13 +1,9 @@
 version: '3.7'
 services:
  frontend-dumbplay:
+   build: .
    container_name: frontend-dumbplay
    image: frontend:latest
    stdin_open: true
    ports:
      - 4000:3000
- backend-dumbplay:
-   container_name: backend-dumbplay
-   image: backend:latest
-   ports:
-     - 6000:5000
