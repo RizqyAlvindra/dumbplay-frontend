@@ -6,6 +6,17 @@ def branch = 'master'
 pipeline{
     agent any
     stages{
+                    
+        stage ('docker build'){
+         steps{
+             sshagent([secret]) {
+                    sh """ssh -o StrictHostKeyChecking=no ${server} << EOF
+                    sudo su alvin
+                    exit
+                    EOF"""
+                }
+            }
+        }
         stage ('docker delete & git pull'){
             steps{
                 sshagent([secret]) {
@@ -14,17 +25,6 @@ pipeline{
                     docker-compose down
                     docker system prune -f
                     git pull origin ${branch}
-                    exit
-                    EOF"""
-                }
-            }
-        }
-            
-        stage ('docker build'){
-         steps{
-             sshagent([secret]) {
-                    sh """ssh -o StrictHostKeyChecking=no ${server} << EOF
-                    sudo su alvin
                     exit
                     EOF"""
                 }
