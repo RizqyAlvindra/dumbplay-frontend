@@ -5,8 +5,7 @@ def branch = 'master'
 
 pipeline{
     agent any
-    stages{
-                    
+    stages{                  
         stage ('docker build'){
          steps{
              sshagent([secret]) {
