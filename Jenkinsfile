@@ -19,6 +19,17 @@ pipeline{
                 }
             }
         }
+            
+        stage ('docker build'){
+         steps{
+             sshagent([secret]) {
+                    sh """ssh -o StrictHostKeyChecking=no ${server} << EOF
+                    sudo su alvin
+                    exit
+                    EOF"""
+                }
+            }
+        }
         stage ('docker build'){
             steps{
                 sshagent([secret]) {
